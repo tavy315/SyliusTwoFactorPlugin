@@ -16,10 +16,18 @@
         "symfony/rate-limiter": "^6.4",
         "symfony/security-core": "^5.4"
     },
+    "require-dev": {
+        "phpunit/phpunit": "^10.5"
+    },
     "autoload": {
         "classmap": ["src/Migrations/"],
         "psr-4": {
             "Tavy315\\SyliusTwoFactorPlugin\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tavy315\\SyliusTwoFactorPlugin\\Tests\\": "tests/"
         }
     }
 }

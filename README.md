@@ -30,3 +30,13 @@ Adds authenticator enrollment, single-use recovery codes, and optional email ver
 - Override templates under `templates/bundles/Tavy315SyliusTwoFactorPlugin/` to apply storefront branding.
 
 Both verification methods are disabled by default.
+
+## Tests
+
+Run `composer install` and then `vendor/bin/phpunit` from the plugin root.
+
+When developing the plugin alongside a store that already installs it through a Composer path repository, you can run the plugin suite with the store's installed dependencies. From the store root, run:
+
+```sh
+SYLIUS_TWO_FACTOR_TEST_AUTOLOAD="$PWD/vendor/autoload.php" php vendor/bin/phpunit -c ../sylius-two-factor-plugin/phpunit.xml.dist
+```

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="tests/bootstrap.php" cacheDirectory=".phpunit.cache">
+    <testsuites>
+        <testsuite name="Sylius Two-Factor Plugin">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+    <php>
+        <server name="TWO_FACTOR_ENCRYPTION_KEY" value="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" force="true"/>
+    </php>
+</phpunit>
