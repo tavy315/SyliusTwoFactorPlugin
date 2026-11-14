@@ -40,7 +40,7 @@
                     <div class="alert alert-danger">{{ message }}</div>
                 {% endfor %}
 
-                <form method="post" action="{{ path('app_shop_two_factor_confirm_enrollment') }}">
+                <form method="post" action="{{ path('app_shop_two_factor_confirm') }}">
                     <input type="hidden" name="_token" value="{{ csrf_token('two_factor_enrollment') }}">
                     <div class="form-group mb-4">
                         <label for="two-factor-code">Enter the 6-digit code from your app</label>

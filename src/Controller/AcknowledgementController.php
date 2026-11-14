@@ -16,7 +16,7 @@ use Tavy315\SyliusTwoFactorPlugin\Security\EnrollmentSessionKeys;
 use Tavy315\SyliusTwoFactorPlugin\Security\SignInSessionKeys;
 use Tavy315\SyliusTwoFactorPlugin\Security\TwoFactorUserInterface;
 
-final readonly class AcknowledgeRecoveryCodesController
+final readonly class AcknowledgementController
 {
     public const TWO_FACTOR_RECOVERY_CODES = 'two_factor_recovery_codes';
 
@@ -40,7 +40,7 @@ final readonly class AcknowledgeRecoveryCodesController
         $sessionKey = EnrollmentSessionKeys::recoveryCodes($user, $area->value);
 
         if (!$session->has($sessionKey)) {
-            return new RedirectResponse($this->urlGenerator->generate($area->route('enrollment')));
+            return new RedirectResponse($this->urlGenerator->generate($area->route('enroll')));
         }
 
         $user->acknowledgeTwoFactorRecoveryCodes();

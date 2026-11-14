@@ -78,13 +78,12 @@ final readonly class EnrollmentController
 
         $qrCodeWriter = new Writer(new ImageRenderer(new RendererStyle(220), new SvgImageBackEnd()));
 
-        return new Response($this->twig->render(
-            $area->template('enrollment'),
-            [
+        return new Response(
+            $this->twig->render($area->template('enrollment'), [
                 'manualKey' => $secret,
                 'qrCodeSvg' => $qrCodeWriter->writeString($this->enrollmentService->provisioningUri($user, $secret)),
-            ],
-        ));
+            ]),
+        );
     }
 
     private function showRecoveryCodes(Request $request, TwoFactorUserInterface $user, TwoFactorArea $area): Response
@@ -97,10 +96,11 @@ final readonly class EnrollmentController
             return $this->showEnrollment($request, $user, $area);
         }
 
-        return new Response($this->twig->render(
-            $area->template('recovery-codes'),
-            ['recoveryCodes' => $recoveryCodes],
-        ), Response::HTTP_OK, ['Cache-Control' => 'no-store, private']);
+        return new Response(
+            $this->twig->render($area->template('recovery-codes'), ['recoveryCodes' => $recoveryCodes]),
+            Response::HTTP_OK,
+            ['Cache-Control' => 'no-store, private'],
+        );
     }
 
     private function restartIncompleteEnrollment(Request $request, TwoFactorUserInterface $user, TwoFactorArea $area): void

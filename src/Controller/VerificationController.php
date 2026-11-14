@@ -52,7 +52,7 @@ final readonly class VerificationController
         $totp = $this->methods->totp && $user->hasCompletedTwoFactorEnrollment();
         $email = $this->methods->emailAddress($user);
 
-        if ($this->methods->isSatisfied($user, $session) || (!$this->methods->email && !$totp)) {
+        if ((!$this->methods->email && !$totp) || $this->methods->isSatisfied($user, $session)) {
             throw new AccessDeniedException();
         }
 
@@ -86,7 +86,7 @@ final readonly class VerificationController
                 }
             }
 
-            return new RedirectResponse($this->urlGenerator->generate($area->route('verification')));
+            return new RedirectResponse($this->urlGenerator->generate($area->route('verify')));
         }
 
         try {
@@ -95,7 +95,7 @@ final readonly class VerificationController
                 if (!$this->verificationAttemptLimiter->consume($user, $request->getClientIp(), 'email_verify')) {
                     $session->getFlashBag()->add('error', 'Too many verification attempts. Please try again later.');
 
-                    return new RedirectResponse($this->urlGenerator->generate($area->route('verification')));
+                    return new RedirectResponse($this->urlGenerator->generate($area->route('verify')));
                 }
 
                 $this->emailChallenge->verify($session, $challengeKey, $email, $code);
@@ -110,7 +110,7 @@ final readonly class VerificationController
                 ? 'Too many verification attempts. Please try again later.'
                 : 'The code is invalid or has expired. Please try again.');
 
-            return new RedirectResponse($this->urlGenerator->generate($area->route('verification')));
+            return new RedirectResponse($this->urlGenerator->generate($area->route('verify')));
         }
 
         $session->set($verifiedKey, $method);

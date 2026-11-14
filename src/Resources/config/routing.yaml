@@ -1,46 +1,46 @@
-app_admin_two_factor_enrollment:
-    path: /%sylius_admin.path_name%/two-factor
+app_admin_two_factor_enroll:
+    path: /%sylius_admin.path_name%/two-factor/enroll
     controller: Tavy315\SyliusTwoFactorPlugin\Controller\EnrollmentController
     defaults: { twoFactorArea: admin }
     methods: [ GET ]
 
-app_admin_two_factor_confirm_enrollment:
-    path: /%sylius_admin.path_name%/two-factor/confirm-enrollment
-    controller: Tavy315\SyliusTwoFactorPlugin\Controller\ConfirmEnrollmentController
+app_admin_two_factor_confirm:
+    path: /%sylius_admin.path_name%/two-factor/confirm
+    controller: Tavy315\SyliusTwoFactorPlugin\Controller\ConfirmationController
     defaults: { twoFactorArea: admin }
     methods: [ POST ]
 
-app_admin_two_factor_acknowledge_recovery_codes:
-    path: /%sylius_admin.path_name%/two-factor/acknowledge-recovery-codes
-    controller: Tavy315\SyliusTwoFactorPlugin\Controller\AcknowledgeRecoveryCodesController
+app_admin_two_factor_acknowledge:
+    path: /%sylius_admin.path_name%/two-factor/acknowledge
+    controller: Tavy315\SyliusTwoFactorPlugin\Controller\AcknowledgementController
     defaults: { twoFactorArea: admin }
     methods: [ POST ]
 
-app_shop_two_factor_enrollment:
-    path: /two-factor
-    controller: Tavy315\SyliusTwoFactorPlugin\Controller\EnrollmentController
-    defaults: { twoFactorArea: shop }
-    methods: [ GET ]
-
-app_shop_two_factor_confirm_enrollment:
-    path: /two-factor/confirm-enrollment
-    controller: Tavy315\SyliusTwoFactorPlugin\Controller\ConfirmEnrollmentController
-    defaults: { twoFactorArea: shop }
-    methods: [ POST ]
-
-app_shop_two_factor_acknowledge_recovery_codes:
-    path: /two-factor/acknowledge-recovery-codes
-    controller: Tavy315\SyliusTwoFactorPlugin\Controller\AcknowledgeRecoveryCodesController
-    defaults: { twoFactorArea: shop }
-    methods: [ POST ]
-
-app_admin_two_factor_verification:
+app_admin_two_factor_verify:
     path: /%sylius_admin.path_name%/two-factor/verify
     controller: Tavy315\SyliusTwoFactorPlugin\Controller\VerificationController
     defaults: { twoFactorArea: admin }
     methods: [ GET, POST ]
 
-app_shop_two_factor_verification:
+app_shop_two_factor_enroll:
+    path: /two-factor/enroll
+    controller: Tavy315\SyliusTwoFactorPlugin\Controller\EnrollmentController
+    defaults: { twoFactorArea: shop }
+    methods: [ GET ]
+
+app_shop_two_factor_confirm:
+    path: /two-factor/confirm
+    controller: Tavy315\SyliusTwoFactorPlugin\Controller\ConfirmationController
+    defaults: { twoFactorArea: shop }
+    methods: [ POST ]
+
+app_shop_two_factor_acknowledge:
+    path: /two-factor/acknowledge
+    controller: Tavy315\SyliusTwoFactorPlugin\Controller\AcknowledgementController
+    defaults: { twoFactorArea: shop }
+    methods: [ POST ]
+
+app_shop_two_factor_verify:
     path: /two-factor/verify
     controller: Tavy315\SyliusTwoFactorPlugin\Controller\VerificationController
     defaults: { twoFactorArea: shop }

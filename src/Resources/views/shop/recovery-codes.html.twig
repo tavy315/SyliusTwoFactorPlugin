@@ -13,7 +13,7 @@
                     <pre class="bg-light border rounded p-3"><code>{{ recoveryCodes|join("\n") }}</code></pre>
                 </div>
 
-                <form method="post" action="{{ path('app_shop_two_factor_acknowledge_recovery_codes') }}">
+                <form method="post" action="{{ path('app_shop_two_factor_acknowledge') }}">
                     <input type="hidden" name="_token" value="{{ csrf_token('two_factor_recovery_codes') }}">
                     <div class="form-check mb-3">
                         <input id="recovery-codes-saved" class="form-check-input" name="saved" type="checkbox" required>

@@ -19,7 +19,7 @@
                     <div class="ui negative message">{{ message }}</div>
                 {% endfor %}
 
-                <form class="ui large form" method="post" action="{{ path('app_admin_two_factor_confirm_enrollment') }}">
+                <form class="ui large form" method="post" action="{{ path('app_admin_two_factor_confirm') }}">
                     <input type="hidden" name="_token" value="{{ csrf_token('two_factor_enrollment') }}">
                     <div class="field">
                         <label for="two-factor-code">Enter the 6-digit code</label>

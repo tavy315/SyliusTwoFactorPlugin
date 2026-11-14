@@ -14,7 +14,7 @@
                     <pre class="ui secondary segment"><code>{{ recoveryCodes|join("\n") }}</code></pre>
                 </div>
 
-                <form method="post" class="ui large form" action="{{ path('app_admin_two_factor_acknowledge_recovery_codes') }}">
+                <form method="post" class="ui large form" action="{{ path('app_admin_two_factor_acknowledge') }}">
                     <input type="hidden" name="_token" value="{{ csrf_token('two_factor_recovery_codes') }}">
                     <div class="field">
                         <input id="recovery-codes-saved" name="saved" type="checkbox" required>

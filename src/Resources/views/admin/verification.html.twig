@@ -15,7 +15,7 @@
                 {% if email %}
                     {% if emailSent %}
                         <p>Enter the six-digit code we sent to your account email address. The code expires five minutes after sending.</p>
-                        <form class="ui large form" method="post" action="{{ path('app_admin_two_factor_verification') }}">
+                        <form class="ui large form" method="post" action="{{ path('app_admin_two_factor_verify') }}">
                             <input type="hidden" name="_token" value="{{ csrf_token('two_factor_verification') }}">
                             <div class="field">
                                 <label for="two-factor-email-code">Email code</label>
@@ -27,7 +27,7 @@
                             </div>
                         </form>
                     {% else %}
-                        <form class="ui basic segment" method="post" action="{{ path('app_admin_two_factor_verification') }}">
+                        <form class="ui basic segment" method="post" action="{{ path('app_admin_two_factor_verify') }}">
                             <input type="hidden" name="_token" value="{{ csrf_token('two_factor_verification') }}">
                             <button class="ui {{ totp ? 'secondary' : 'primary' }} button" type="submit" name="method" value="send_email">
                                 Send me an email code
@@ -44,7 +44,7 @@
 
                 {% if totp %}
                     <p>Enter the code from your authenticator app or use a saved recovery code.</p>
-                    <form class="ui large form" method="post" action="{{ path('app_admin_two_factor_verification') }}">
+                    <form class="ui large form" method="post" action="{{ path('app_admin_two_factor_verify') }}">
                         <input type="hidden" name="_token" value="{{ csrf_token('two_factor_verification') }}">
                         <div class="field">
                             <label for="two-factor-code">Authenticator or recovery code</label>
@@ -55,7 +55,7 @@
                         </div>
                     </form>
                 {% elseif canEnroll %}
-                    <p><a class="ui primary button" href="{{ path('app_admin_two_factor_enrollment') }}">Set up an authenticator app</a></p>
+                    <p><a class="ui primary button" href="{{ path('app_admin_two_factor_enroll') }}">Set up an authenticator app</a></p>
                 {% endif %}
 
                 <p><a href="{{ path('sylius_admin_logout') }}">Log out</a></p>

@@ -62,14 +62,14 @@ final readonly class EnrollmentGateSubscriber implements EventSubscriberInterfac
             return;
         }
 
-        if ($route === 'sylius_' . $scope . '_logout' || $route === $prefix . 'verification') {
+        if ($route === 'sylius_' . $scope . '_logout' || $route === $prefix . 'verify') {
             return;
         }
 
         $enrollmentRoute = \in_array($route, [
-            $prefix . 'enrollment',
-            $prefix . 'confirm_enrollment',
-            $prefix . 'acknowledge_recovery_codes',
+            $prefix . 'enroll',
+            $prefix . 'confirm',
+            $prefix . 'acknowledge',
         ], true);
 
         if ($enrollmentRoute && $this->methods->totp) {
@@ -80,9 +80,9 @@ final readonly class EnrollmentGateSubscriber implements EventSubscriberInterfac
             return;
         }
 
-        $route = $prefix . 'enrollment';
-        if ($user->hasCompletedTwoFactorEnrollment() || !$this->methods->totp || $this->methods->emailAddress($user) !== null) {
-            $route = $prefix . 'verification';
+        $route = $prefix . 'enroll';
+        if (!$this->methods->totp || $user->hasCompletedTwoFactorEnrollment() || $this->methods->emailAddress($user) !== null) {
+            $route = $prefix . 'verify';
 
             if (!$enrollmentRoute) {
                 $this->storeTargetPath($request, $user);

@@ -17,7 +17,7 @@ use Tavy315\SyliusTwoFactorPlugin\Security\EnrollmentSessionKeys;
 use Tavy315\SyliusTwoFactorPlugin\Security\InvalidEnrollmentCode;
 use Tavy315\SyliusTwoFactorPlugin\Security\TwoFactorUserInterface;
 
-final readonly class ConfirmEnrollmentController
+final readonly class ConfirmationController
 {
     public function __construct(
         private CsrfTokenManagerInterface $csrfTokenManager,
@@ -50,7 +50,7 @@ final readonly class ConfirmEnrollmentController
         } catch (InvalidEnrollmentCode) {
             $session->getFlashBag()->add('error', 'The code is invalid. Check your authenticator app and try again.');
 
-            return new RedirectResponse($this->urlGenerator->generate($area->route('enrollment')));
+            return new RedirectResponse($this->urlGenerator->generate($area->route('enroll')));
         }
 
         $this->entityManager->flush();
@@ -58,7 +58,7 @@ final readonly class ConfirmEnrollmentController
         $session->remove(EnrollmentSessionKeys::enrollmentSecret($user, $area->value));
         $session->set(EnrollmentSessionKeys::recoveryCodes($user, $area->value), $recoveryCodes);
 
-        return new RedirectResponse($this->urlGenerator->generate($area->route('enrollment')));
+        return new RedirectResponse($this->urlGenerator->generate($area->route('enroll')));
     }
 
     private function assertValidCsrfToken(string $token): void
