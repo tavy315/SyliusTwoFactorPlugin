@@ -3,6 +3,7 @@
     "type": "sylius-plugin",
     "description": "Two-factor authentication for Sylius administrators and shop users.",
     "keywords": ["sylius", "sylius-plugin", "two-factor-authentication"],
+    "license": "MIT",
     "require": {
         "php": ">=8.2",
         "ext-sodium": "*",
