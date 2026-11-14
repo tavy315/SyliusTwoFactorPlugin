@@ -1,0 +1,28 @@
+{% extends '@SyliusAdmin/Security/login.html.twig' %}
+
+{% block title %}Save recovery codes | {{ block('title', '@SyliusShop/layout.html.twig') }}{% endblock %}
+
+{% block content %}
+    <div class="ui middle aligned center aligned grid">
+        <div class="column" style="width: 100%; max-width: 720px;">
+            {% include '@Tavy315SyliusTwoFactorPlugin/admin/_logo.html.twig' %}
+            <div class="ui left aligned very padded segment">
+                <h1 class="ui header">Save your recovery codes</h1>
+                <p>Each code works once if you lose access to your authenticator. Save them somewhere secure; they will not be shown again.</p>
+
+                <div style="margin-bottom: 1.5em;">
+                    <pre class="ui secondary segment"><code>{{ recoveryCodes|join("\n") }}</code></pre>
+                </div>
+
+                <form method="post" class="ui large form" action="{{ path('app_admin_two_factor_acknowledge_recovery_codes') }}">
+                    <input type="hidden" name="_token" value="{{ csrf_token('two_factor_recovery_codes') }}">
+                    <div class="field">
+                        <input id="recovery-codes-saved" name="saved" type="checkbox" required>
+                        <label for="recovery-codes-saved">I have saved these recovery codes.</label>
+                    </div>
+                    <button class="ui primary button" type="submit">Continue</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

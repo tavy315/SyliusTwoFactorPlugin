@@ -1,0 +1,57 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% block title %}Set up two-factor authentication | {{ parent() }}{% endblock %}
+
+{% block cover %}
+    {% include '@Tavy315SyliusTwoFactorPlugin/shop/_cover.html.twig' %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    <nav aria-label="breadcrumb" class="breadcrumb-nav">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{{ path('bitbag_sylius_elasticsearch_plugin_shop_list_products', {'slug': 'catalog', '_locale': sylius.localeCode}) }}"><i class="icon-home"></i></a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Two-factor authentication</li>
+            </ol>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-8">
+            <div class="flex-column align-items-stretch border-color-primary px-4 py-4">
+                <div class="text-center">
+                    <h1 class="text-dark mb-2">Set up two-factor authentication</h1>
+                    <p class="mb-4">Open your authenticator app and scan the QR code.<br /><b>Google Authenticator</b>,
+                        <b>Microsoft Authenticator</b> and <b>1Password</b> are supported.</p>
+                </div>
+
+                <div class="text-center mb-2">{{ qrCodeSvg|raw }}</div>
+
+                <div class="row-with-bg p-3 mb-2">
+                    <p class="mb-0 mt-1"><strong>Can't scan the code?</strong> Enter this setup key manually in your authenticator app:</p>
+                    <code class="d-block mt-2 display-4" style="word-break: break-all">{{ manualKey }}</code>
+                </div>
+
+                {% for message in app.flashes('error') %}
+                    <div class="alert alert-danger">{{ message }}</div>
+                {% endfor %}
+
+                <form method="post" action="{{ path('app_shop_two_factor_confirm_enrollment') }}">
+                    <input type="hidden" name="_token" value="{{ csrf_token('two_factor_enrollment') }}">
+                    <div class="form-group mb-4">
+                        <label for="two-factor-code">Enter the 6-digit code from your app</label>
+                        <div class="d-flex align-items-center">
+                            <input id="two-factor-code" class="form-control" style="min-width: 0;" name="code" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9 ]{6,}" required autofocus>
+                            <button class="btn btn-primary btn-lg flex-shrink-0" type="submit">Verify and continue</button>
+                            <a class="btn btn-outline-secondary" href="{{ path('sylius_shop_logout') }}">Log out</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

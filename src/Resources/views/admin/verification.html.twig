@@ -1,0 +1,65 @@
+{% extends '@SyliusAdmin/Security/login.html.twig' %}
+
+{% block title %}Two-factor authentication | {{ block('title', '@SyliusShop/layout.html.twig') }}{% endblock %}
+
+{% block content %}
+    <div class="ui middle aligned center aligned grid">
+        <div class="column" style="width: 100%; max-width: 720px;">
+            {% include '@Tavy315SyliusTwoFactorPlugin/admin/_logo.html.twig' %}
+            <div class="ui left aligned very padded segment">
+                <h1 class="ui header">Two-factor authentication</h1>
+                {% for message in app.flashes('error') %}
+                    <div class="ui negative message">{{ message }}</div>
+                {% endfor %}
+
+                {% if email %}
+                    {% if emailSent %}
+                        <p>Enter the six-digit code we sent to your account email address. The code expires five minutes after sending.</p>
+                        <form class="ui large form" method="post" action="{{ path('app_admin_two_factor_verification') }}">
+                            <input type="hidden" name="_token" value="{{ csrf_token('two_factor_verification') }}">
+                            <div class="field">
+                                <label for="two-factor-email-code">Email code</label>
+                                <div class="ui action input">
+                                    <input id="two-factor-email-code" style="min-width: 0;" type="text" name="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]{6}" required autofocus>
+                                    <button class="ui primary button" type="submit" name="method" value="email">Verify email code</button>
+                                    <button class="ui button tertiary" type="submit" name="method" value="send_email" formnovalidate>Resend code</button>
+                                </div>
+                            </div>
+                        </form>
+                    {% else %}
+                        <form class="ui basic segment" method="post" action="{{ path('app_admin_two_factor_verification') }}">
+                            <input type="hidden" name="_token" value="{{ csrf_token('two_factor_verification') }}">
+                            <button class="ui {{ totp ? 'secondary' : 'primary' }} button" type="submit" name="method" value="send_email">
+                                Send me an email code
+                            </button>
+                        </form>
+                    {% endif %}
+                {% elseif not totp and not canEnroll %}
+                    <p>This account needs an email address to sign in. Contact support for help.</p>
+                {% endif %}
+
+                {% if email and (totp or canEnroll) %}
+                    <div class="ui divider"></div>
+                {% endif %}
+
+                {% if totp %}
+                    <p>Enter the code from your authenticator app or use a saved recovery code.</p>
+                    <form class="ui large form" method="post" action="{{ path('app_admin_two_factor_verification') }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token('two_factor_verification') }}">
+                        <div class="field">
+                            <label for="two-factor-code">Authenticator or recovery code</label>
+                            <div class="ui action input">
+                                <input id="two-factor-code" style="min-width: 0;" name="code" inputmode="text" autocomplete="one-time-code" required{% if not emailSent %} autofocus{% endif %}>
+                                <button class="ui button primary" type="submit">Verify</button>
+                            </div>
+                        </div>
+                    </form>
+                {% elseif canEnroll %}
+                    <p><a class="ui primary button" href="{{ path('app_admin_two_factor_enrollment') }}">Set up an authenticator app</a></p>
+                {% endif %}
+
+                <p><a href="{{ path('sylius_admin_logout') }}">Log out</a></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

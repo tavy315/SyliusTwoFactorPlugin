@@ -1,0 +1,36 @@
+{% extends '@SyliusAdmin/Security/login.html.twig' %}
+
+{% block title %}Set up two-factor authentication | {{ block('title', '@SyliusShop/layout.html.twig') }}{% endblock %}
+
+{% block content %}
+    <div class="ui middle aligned center aligned grid">
+        <div class="column" style="width: 100%; max-width: 720px;">
+            {% include '@Tavy315SyliusTwoFactorPlugin/admin/_logo.html.twig' %}
+            <div class="ui left aligned very padded segment">
+                <h1 class="ui header">Set up two-factor authentication</h1>
+                <p>To continue, open an authenticator app such as <b>Google Authenticator</b>, <b>Microsoft Authenticator</b> and <b>1Password</b> and scan this QR code.</p>
+
+                <div style="text-align: center; margin: 1.5em 0;">{{ qrCodeSvg|raw }}</div>
+
+                <p>If you cannot scan the code, enter this setup key manually:</p>
+                <p><code style="word-break: break-all;color:#e83e8c;font-size: 1.5rem">{{ manualKey }}</code></p>
+
+                {% for message in app.flashes('error') %}
+                    <div class="ui negative message">{{ message }}</div>
+                {% endfor %}
+
+                <form class="ui large form" method="post" action="{{ path('app_admin_two_factor_confirm_enrollment') }}">
+                    <input type="hidden" name="_token" value="{{ csrf_token('two_factor_enrollment') }}">
+                    <div class="field">
+                        <label for="two-factor-code">Enter the 6-digit code</label>
+                        <div class="ui action input">
+                            <input id="two-factor-code" style="min-width: 0;" name="code" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9 ]{6,}" required autofocus>
+                            <button class="ui primary button" type="submit">Verify and continue</button>
+                            <a class="ui button tertiary" href="{{ path('sylius_admin_logout') }}">Log out</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

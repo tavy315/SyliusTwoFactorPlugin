@@ -1,0 +1,22 @@
+{
+    "name": "tavy315/sylius-two-factor-plugin",
+    "type": "sylius-plugin",
+    "description": "Two-factor authentication for Sylius administrators and shop users.",
+    "keywords": ["sylius", "sylius-plugin", "two-factor-authentication"],
+    "require": {
+        "php": ">=8.2",
+        "ext-sodium": "*",
+        "bacon/bacon-qr-code": "^3.0",
+        "doctrine/orm": "^2.15",
+        "spomky-labs/otphp": "^11.0",
+        "sylius/sylius": "^1.12",
+        "symfony/mailer": "^5.4",
+        "symfony/rate-limiter": "^6.4",
+        "symfony/security-core": "^5.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Tavy315\\SyliusTwoFactorPlugin\\": "src/"
+        }
+    }
+}

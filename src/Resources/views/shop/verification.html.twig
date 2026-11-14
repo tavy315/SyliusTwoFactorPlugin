@@ -1,0 +1,64 @@
+{% extends '@Tavy315SyliusTwoFactorPlugin/shop/enrollment.html.twig' %}
+
+{% block title %}Two-factor authentication | {{ block('title', '@SyliusShop/layout.html.twig') }}{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-8">
+            <div class="flex-column align-items-stretch border-color-primary px-4 py-4 mb-4">
+                <h1 class="text-dark mb-2">Two-factor authentication</h1>
+                {% for message in app.flashes('error') %}
+                    <div class="alert alert-danger">{{ message }}</div>
+                {% endfor %}
+
+                {% if email %}
+                    {% if emailSent %}
+                        <p>Enter the six-digit code we sent to your account email address. The code expires five minutes after sending.</p>
+                        <form method="post" action="{{ path('app_shop_two_factor_verification') }}" class="mb-2">
+                            <input type="hidden" name="_token" value="{{ csrf_token('two_factor_verification') }}">
+                            <div class="form-group mb-4">
+                                <label for="two-factor-email-code">Email code</label>
+                                <div class="d-flex align-items-center flex-wrap flex-sm-nowrap">
+                                    <input class="form-control" id="two-factor-email-code" style="min-width: 0;" type="text" name="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]{6}" required autofocus>
+                                    <button class="btn btn-primary btn-lg flex-shrink-0" type="submit" name="method" value="email">Verify email code</button>
+                                    <button class="btn btn-outline-secondary" type="submit" name="method" value="send_email" formnovalidate>Resend code</button>
+                                </div>
+                            </div>
+                        </form>
+                    {% else %}
+                        <form method="post" action="{{ path('app_shop_two_factor_verification') }}" class="mb-3">
+                            <input type="hidden" name="_token" value="{{ csrf_token('two_factor_verification') }}">
+                            <button class="btn {{ totp ? 'btn-outline-secondary' : 'btn-primary' }}" type="submit" name="method" value="send_email">
+                                Send me an email code
+                            </button>
+                        </form>
+                    {% endif %}
+                {% elseif not totp and not canEnroll %}
+                    <p>This account needs an email address to sign in. Contact support for help.</p>
+                {% endif %}
+
+                {% if email and (totp or canEnroll) %}
+                    <hr class="my-4">
+                {% endif %}
+
+                {% if totp %}
+                    <p>Enter the code from your authenticator app or use a saved recovery code.</p>
+                    <form method="post" action="{{ path('app_shop_two_factor_verification') }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token('two_factor_verification') }}">
+                        <div class="form-group mb-4">
+                            <label for="two-factor-code">Authenticator or recovery code</label>
+                            <div class="d-flex align-items-center">
+                                <input id="two-factor-code" class="form-control" style="min-width: 0;" name="code" inputmode="text" autocomplete="one-time-code" required{% if not emailSent %} autofocus{% endif %}>
+                                <button class="btn btn-primary flex-shrink-0" type="submit">Verify</button>
+                            </div>
+                        </div>
+                    </form>
+                {% elseif canEnroll %}
+                    <p><a class="btn btn-primary" href="{{ path('app_shop_two_factor_enrollment') }}">Set up an authenticator app</a></p>
+                {% endif %}
+
+                <p><a href="{{ path('sylius_shop_logout') }}">Log out</a></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

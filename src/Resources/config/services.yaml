@@ -1,0 +1,46 @@
+parameters:
+    env(TWO_FACTOR_TOTP_ENABLED): '0'
+    env(TWO_FACTOR_EMAIL_ENABLED): '0'
+    env(TWO_FACTOR_EMAIL_SENDER): ''
+    tavy315_sylius_two_factor.issuer: 'Sylius'
+    tavy315_sylius_two_factor.email_sender: '%env(TWO_FACTOR_EMAIL_SENDER)%'
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    Tavy315\SyliusTwoFactorPlugin\Controller\:
+        resource: '../../Controller/'
+        tags: [ 'controller.service_arguments' ]
+
+    Tavy315\SyliusTwoFactorPlugin\EventSubscriber\:
+        resource: '../../EventSubscriber/'
+
+    Tavy315\SyliusTwoFactorPlugin\Security\CodeVerifier: ~
+    Tavy315\SyliusTwoFactorPlugin\Security\RecoveryCodeGenerator: ~
+    Tavy315\SyliusTwoFactorPlugin\Security\VerificationService: ~
+
+    Tavy315\SyliusTwoFactorPlugin\Security\VerificationAttemptLimiter:
+        arguments:
+            $twoFactorVerificationUserLimiter: '@limiter.two_factor_verification_user'
+            $twoFactorVerificationIpLimiter: '@limiter.two_factor_verification_ip'
+
+    Tavy315\SyliusTwoFactorPlugin\Security\EnrollmentService:
+        arguments:
+            $issuer: '%tavy315_sylius_two_factor.issuer%'
+
+    Tavy315\SyliusTwoFactorPlugin\EventSubscriber\EnrollmentGateSubscriber:
+        arguments:
+            $firewallMap: '@security.firewall.map'
+
+    Tavy315\SyliusTwoFactorPlugin\Security\TwoFactorMethods:
+        arguments:
+            $totp: '%env(bool:TWO_FACTOR_TOTP_ENABLED)%'
+            $email: '%env(bool:TWO_FACTOR_EMAIL_ENABLED)%'
+
+    Tavy315\SyliusTwoFactorPlugin\Security\EmailChallenge:
+        arguments:
+            $transport: '@mailer.transports'
+            $senderAddress: '%tavy315_sylius_two_factor.email_sender%'
+            $secret: '%kernel.secret%'

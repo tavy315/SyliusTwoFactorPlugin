@@ -1,0 +1,9 @@
+{% if data is not null and data.hasCompletedTwoFactorEnrollment() %}
+    <span class="ui teal label">
+        <i class="checkmark icon" aria-hidden="true"></i>{{ 'sylius.ui.yes'|trans }}
+    </span>
+{% else %}
+    <span class="ui icon label">
+        <i class="remove icon" aria-hidden="true"></i>{{ 'sylius.ui.no'|trans }}
+    </span>
+{% endif %}
