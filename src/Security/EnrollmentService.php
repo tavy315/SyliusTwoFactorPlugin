@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Tavy315\SyliusTwoFactorPlugin\Security;
 
 use OTPHP\TOTP;
+use Tavy315\SyliusTwoFactorPlugin\Entity\User\TwoFactorUserInterface;
+use Tavy315\SyliusTwoFactorPlugin\Exception\InvalidEnrollmentCode;
 
 final class EnrollmentService
 {

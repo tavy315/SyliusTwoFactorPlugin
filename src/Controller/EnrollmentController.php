@@ -15,9 +15,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Security;
+use Tavy315\SyliusTwoFactorPlugin\Entity\User\TwoFactorUserInterface;
 use Tavy315\SyliusTwoFactorPlugin\Security\EnrollmentService;
 use Tavy315\SyliusTwoFactorPlugin\Security\EnrollmentSessionKeys;
-use Tavy315\SyliusTwoFactorPlugin\Security\TwoFactorUserInterface;
 use Twig\Environment;
 
 final readonly class EnrollmentController

@@ -8,6 +8,7 @@
         "php": ">=8.2",
         "ext-sodium": "*",
         "bacon/bacon-qr-code": "^3.0",
+        "doctrine/doctrine-migrations-bundle": "^3.0.1",
         "doctrine/orm": "^2.15",
         "spomky-labs/otphp": "^11.0",
         "sylius/sylius": "^1.12",
@@ -16,6 +17,7 @@
         "symfony/security-core": "^5.4"
     },
     "autoload": {
+        "classmap": ["src/Migrations/"],
         "psr-4": {
             "Tavy315\\SyliusTwoFactorPlugin\\": "src/"
         }

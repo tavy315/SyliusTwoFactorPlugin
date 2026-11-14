@@ -6,6 +6,8 @@ namespace Tavy315\SyliusTwoFactorPlugin\Security;
 
 use Doctrine\DBAL\LockMode;
 use Doctrine\ORM\EntityManagerInterface;
+use Tavy315\SyliusTwoFactorPlugin\Entity\User\TwoFactorUserInterface;
+use Tavy315\SyliusTwoFactorPlugin\Exception\InvalidTwoFactorCode;
 
 final readonly class VerificationService
 {

@@ -6,6 +6,7 @@ namespace Tavy315\SyliusTwoFactorPlugin\Security;
 
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Tavy315\SyliusTwoFactorPlugin\Entity\User\TwoFactorUserInterface;
 
 final readonly class TwoFactorMethods
 {

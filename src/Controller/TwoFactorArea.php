@@ -6,7 +6,7 @@ namespace Tavy315\SyliusTwoFactorPlugin\Controller;
 
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
-use Tavy315\SyliusTwoFactorPlugin\Security\TwoFactorUserInterface;
+use Tavy315\SyliusTwoFactorPlugin\Entity\User\TwoFactorUserInterface;
 
 enum TwoFactorArea: string
 {

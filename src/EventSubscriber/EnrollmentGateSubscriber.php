@@ -14,9 +14,9 @@ use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Security;
+use Tavy315\SyliusTwoFactorPlugin\Entity\User\TwoFactorUserInterface;
 use Tavy315\SyliusTwoFactorPlugin\Security\SignInSessionKeys;
 use Tavy315\SyliusTwoFactorPlugin\Security\TwoFactorMethods;
-use Tavy315\SyliusTwoFactorPlugin\Security\TwoFactorUserInterface;
 
 final readonly class EnrollmentGateSubscriber implements EventSubscriberInterface
 {

@@ -5,8 +5,8 @@ Adds authenticator enrollment, single-use recovery codes, and optional email ver
 ## Installation
 
 1. Require `tavy315/sylius-two-factor-plugin` and register `Tavy315\SyliusTwoFactorPlugin\Tavy315SyliusTwoFactorPlugin` in `config/bundles.php`.
-2. Implement `Tavy315\SyliusTwoFactorPlugin\Security\TwoFactorUserInterface` and use `TwoFactorUserTrait` from the same namespace in both of the application's Doctrine user entities. The entities must implement their respective Sylius Admin or Shop user interfaces.
-3. Generate, review, and run an application Doctrine migration for the four fields mapped by the trait. If your application already has those columns, retain its existing migration history and encryption key.
+2. Implement `Tavy315\SyliusTwoFactorPlugin\Entity\User\TwoFactorUserInterface` and use `TwoFactorUserTrait` from the same namespace in both of the application's Doctrine user entities. The entities must implement their respective Sylius Admin or Shop user interfaces.
+3. Enable DoctrineMigrationsBundle and run `php bin/console doctrine:migrations:migrate` after the Sylius Core migrations. The bundled migration targets the standard Admin and Shop user tables on MySQL or MariaDB. If your app already contains `DoctrineMigrations\Version20260921120000`, remove that local file when upgrading to the bundled version and keep its migration history. For custom user tables, adapt the migration to your schema before running it.
 4. Import the routes in `config/routes/two_factor.yaml`.
 
    ```yaml

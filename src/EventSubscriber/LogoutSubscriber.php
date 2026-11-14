@@ -6,9 +6,9 @@ namespace Tavy315\SyliusTwoFactorPlugin\EventSubscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Http\Event\LogoutEvent;
+use Tavy315\SyliusTwoFactorPlugin\Entity\User\TwoFactorUserInterface;
 use Tavy315\SyliusTwoFactorPlugin\Security\EnrollmentSessionKeys;
 use Tavy315\SyliusTwoFactorPlugin\Security\SignInSessionKeys;
-use Tavy315\SyliusTwoFactorPlugin\Security\TwoFactorUserInterface;
 
 final class LogoutSubscriber implements EventSubscriberInterface
 {

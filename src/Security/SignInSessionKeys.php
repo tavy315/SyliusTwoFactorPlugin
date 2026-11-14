@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tavy315\SyliusTwoFactorPlugin\Security;
 
+use Tavy315\SyliusTwoFactorPlugin\Entity\User\TwoFactorUserInterface;
+
 final class SignInSessionKeys
 {
     public const TWO_FACTOR_LOGIN_PENDING = 'two_factor.login_pending';

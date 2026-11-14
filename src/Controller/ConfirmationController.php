@@ -12,10 +12,10 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
+use Tavy315\SyliusTwoFactorPlugin\Entity\User\TwoFactorUserInterface;
+use Tavy315\SyliusTwoFactorPlugin\Exception\InvalidEnrollmentCode;
 use Tavy315\SyliusTwoFactorPlugin\Security\EnrollmentService;
 use Tavy315\SyliusTwoFactorPlugin\Security\EnrollmentSessionKeys;
-use Tavy315\SyliusTwoFactorPlugin\Security\InvalidEnrollmentCode;
-use Tavy315\SyliusTwoFactorPlugin\Security\TwoFactorUserInterface;
 
 final readonly class ConfirmationController
 {

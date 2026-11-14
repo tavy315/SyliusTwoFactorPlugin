@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tavy315\SyliusTwoFactorPlugin\Security;
 
+use Tavy315\SyliusTwoFactorPlugin\Entity\User\TwoFactorUserInterface;
+
 final class EnrollmentSessionKeys
 {
     public static function enrollmentSecret(TwoFactorUserInterface $user, string $scope): string

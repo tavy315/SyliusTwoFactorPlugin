@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tavy315\SyliusTwoFactorPlugin\Security;
 
 use Symfony\Component\RateLimiter\RateLimiterFactory;
+use Tavy315\SyliusTwoFactorPlugin\Entity\User\TwoFactorUserInterface;
 
 final readonly class VerificationAttemptLimiter
 {

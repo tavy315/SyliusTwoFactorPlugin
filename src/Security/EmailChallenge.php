@@ -7,6 +7,7 @@ namespace Tavy315\SyliusTwoFactorPlugin\Security;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Mailer\Transport\TransportInterface;
 use Symfony\Component\Mime\Email;
+use Tavy315\SyliusTwoFactorPlugin\Exception\InvalidTwoFactorCode;
 
 final readonly class EmailChallenge
 {

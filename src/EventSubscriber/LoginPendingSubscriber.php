@@ -11,8 +11,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Http\SecurityEvents;
+use Tavy315\SyliusTwoFactorPlugin\Entity\User\TwoFactorUserInterface;
 use Tavy315\SyliusTwoFactorPlugin\Security\SignInSessionKeys;
-use Tavy315\SyliusTwoFactorPlugin\Security\TwoFactorUserInterface;
 
 class LoginPendingSubscriber implements EventSubscriberInterface
 {
